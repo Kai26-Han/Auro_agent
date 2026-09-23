@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "required_tools": ["web_fetch", "terminal"],
+  "optional_tools": ["skills_list"],
+  "requires_knowledge_base": false,
+  "activation": {
+    "auto": true,
+    "user_invocable": true,
+    "internal_only": false,
+    "keywords": ["install skill", "skill install", "安装 skill", "安装技能", "SkillHub", "技能商店"],
+    "priority": 100
+  }
+}

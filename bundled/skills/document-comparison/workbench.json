@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "required_tools": ["list_files"],
+  "optional_tools": ["search_files", "read_file", "read_outline", "read_page", "create_note"],
+  "requires_knowledge_base": true,
+  "activation": {
+    "auto": true,
+    "user_invocable": true,
+    "internal_only": false,
+    "keywords": ["对比资料", "比较文档", "资料比较", "document comparison"],
+    "priority": 70
+  }
+}

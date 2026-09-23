@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "required_tools": ["web_search", "web_fetch"],
+  "optional_tools": ["paper_search", "create_note"],
+  "requires_knowledge_base": false,
+  "activation": {
+    "auto": false,
+    "user_invocable": true,
+    "internal_only": false,
+    "keywords": ["联网研究", "网页调研", "搜索网络", "查找最新资料", "web research"],
+    "priority": 80
+  }
+}

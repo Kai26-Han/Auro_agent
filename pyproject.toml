@@ -1,0 +1,49 @@
+[project]
+name = "personal-workbench"
+version = "0.1.0"
+description = "一步步学习 LangGraph，搭建个人学习与工作台"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "faiss-cpu>=1.12,<2",
+    "fastapi>=0.115,<1",
+    "langchain-deepseek>=1,<2",
+    "langchain-openai>=1,<2",
+    "langgraph>=1,<2",
+    "langgraph-checkpoint-sqlite>=3,<4",
+    "mcp>=2.2,<3",
+    "httpx2>=2.13,<3",
+    "jsonschema>=4.26,<5",
+    "litellm>=1.101,<2",
+    "llama-index-core>=0.14,<0.15",
+    "llama-index-vector-stores-faiss>=0.5,<0.6",
+    "pageindex>=0.2.10,<0.3",
+    "pypdf>=6,<7",
+    "pyyaml>=6,<7",
+    "python-dotenv>=1,<2",
+    "python-multipart>=0.0.18,<1",
+    "pillow>=12,<13",
+    "rank-bm25>=0.2.2,<0.3",
+    "uvicorn>=0.30,<1",
+    "ddgs>=9.9.1,<10",
+    "lxml>=5,<7",
+    "httpx>=0.28,<1",
+    "langmem>=0.0.30,<0.1",
+    "mem0ai==1.0.11",
+    "qdrant-client==1.19.1",
+]
+
+[project.scripts]
+workbench = "personal_workbench.cli:main"
+
+[project.optional-dependencies]
+rerank = [
+    "sentence-transformers>=5,<6",
+]
+
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+cache-dir = ".uv-cache"

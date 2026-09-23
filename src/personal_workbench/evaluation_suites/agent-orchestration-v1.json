@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "id": "agent-orchestration",
+  "version": "1.0.0",
+  "name": "Agent 编排基础评测",
+  "description": "使用公开结果和 trace 对普通助手、固定流程、动态团队、审校返工与外部操作做可重复的确定性评分。任务使用合成资料，不要求真实个人数据。",
+  "cases": [
+    {
+      "id": "assistant_basic",
+      "name": "普通问答基线",
+      "description": "验证普通助手能够完成一轮回答，并控制模型调用、延迟和 token。",
+      "task": "请用三句话解释 LangGraph 中 State 的作用。",
+      "capability_kind": "assistant",
+      "tags": ["assistant", "baseline"],
+      "expectations": {"max_model_calls": 4, "max_tokens": 12000, "max_duration_ms": 120000},
+      "weights": {"completion": 50, "planning": 0, "tools": 0, "evidence": 0, "review": 0, "artifact": 0, "efficiency": 50},
+      "pass_score": 80,
+      "hard_requirements": ["status"]
+    },
+    {
+      "id": "grounded_knowledge_answer",
+      "name": "知识库依据问答",
+      "description": "必须检索资料、返回能对应实际来源的引用，并在预算内完成。",
+      "task": "根据评测资料说明检查点恢复时 thread_id 的要求，并标注引用。",
+      "capability_kind": "assistant",
+      "tags": ["rag", "citation"],
+      "expectations": {"required_tools": ["search_files"], "min_tool_calls": 1, "require_citations": true, "min_citations": 1, "max_model_calls": 6, "max_tokens": 20000, "max_duration_ms": 180000},
+      "weights": {"completion": 20, "planning": 0, "tools": 25, "evidence": 35, "review": 0, "artifact": 0, "efficiency": 20},
+      "pass_score": 80,
+      "hard_requirements": ["status", "citations", "forbidden_tools"]
+    },
+    {
+      "id": "note_artifact",
+      "name": "笔记成果保存",
+      "description": "明确要求保存后，应调用 create_note 并产生具有 SHA-256 和大小的成果。",
+      "task": "把本轮学习要点保存为 evaluation-note.md。",
+      "capability_kind": "assistant",
+      "tags": ["tool", "artifact"],
+      "expectations": {"required_tools": ["create_note"], "min_tool_calls": 1, "require_artifact": true, "max_model_calls": 6, "max_tokens": 20000, "max_duration_ms": 180000},
+      "weights": {"completion": 20, "planning": 0, "tools": 30, "evidence": 0, "review": 0, "artifact": 35, "efficiency": 15},
+      "pass_score": 85,
+      "hard_requirements": ["status", "artifact", "forbidden_tools"]
+    },
+    {
+      "id": "fixed_report",
+      "name": "固定流程报告",
+      "description": "检查研究、写作、独立审校和交付阶段，以及带校验值的最终成果。",
+      "task": "根据合成项目资料生成一份带引用的简短报告，并完成独立审校。",
+      "capability_kind": "workflow",
+      "tags": ["workflow", "review", "artifact"],
+      "expectations": {"required_stages": ["research", "write", "review", "deliver"], "min_stage_count": 4, "require_citations": true, "min_citations": 1, "require_review": true, "require_artifact": true, "max_model_calls": 16, "max_tokens": 80000, "max_duration_ms": 600000},
+      "weights": {"completion": 15, "planning": 25, "tools": 10, "evidence": 10, "review": 20, "artifact": 10, "efficiency": 10},
+      "pass_score": 80,
+      "hard_requirements": ["status", "artifact", "citations", "forbidden_tools"]
+    },
+    {
+      "id": "workflow_rework",
+      "name": "审校返工闭环",
+      "description": "首次审校指出问题后，应发生一次受限返工，并在再次审校后交付。",
+      "task": "生成报告；首次审校发现预设问题后修正，再重新审校并交付。",
+      "capability_kind": "workflow",
+      "tags": ["workflow", "rework"],
+      "expectations": {"required_stages": ["write", "review", "deliver"], "min_stage_count": 4, "require_citations": true, "min_citations": 1, "require_review": true, "min_rework": 1, "require_artifact": true, "max_model_calls": 24, "max_tokens": 120000, "max_duration_ms": 900000},
+      "weights": {"completion": 15, "planning": 20, "tools": 5, "evidence": 5, "review": 30, "artifact": 10, "efficiency": 15},
+      "pass_score": 80,
+      "hard_requirements": ["status", "artifact", "citations"]
+    },
+    {
+      "id": "dynamic_team",
+      "name": "动态团队规划与执行",
+      "description": "团长应生成受约束计划，多个成员执行后汇总并交付成果。",
+      "task": "让研究团队比较两个合成方案的证据、限制和适用条件，并交付结论。",
+      "capability_kind": "team",
+      "tags": ["team", "planning"],
+      "expectations": {"required_stages": ["plan", "deliver"], "min_stage_count": 4, "require_citations": true, "min_citations": 1, "require_artifact": true, "max_model_calls": 32, "max_tokens": 150000, "max_duration_ms": 900000},
+      "weights": {"completion": 15, "planning": 35, "tools": 10, "evidence": 10, "review": 5, "artifact": 10, "efficiency": 15},
+      "pass_score": 78,
+      "hard_requirements": ["status", "artifact", "citations", "forbidden_tools"]
+    },
+    {
+      "id": "external_action_approval",
+      "name": "外部写入审批",
+      "description": "外部写操作必须产生审批 span，用户批准后只能提交一次。",
+      "task": "通过评测连接器写入一条合成记录，并按页面提示确认。",
+      "capability_kind": "assistant",
+      "tags": ["connector", "approval", "idempotency"],
+      "expectations": {"min_tool_calls": 1, "require_approval": true, "max_model_calls": 6, "max_tokens": 20000, "max_duration_ms": 240000},
+      "weights": {"completion": 20, "planning": 0, "tools": 45, "evidence": 0, "review": 0, "artifact": 0, "efficiency": 35},
+      "pass_score": 85,
+      "hard_requirements": ["status", "approval", "forbidden_tools"]
+    }
+  ]
+}

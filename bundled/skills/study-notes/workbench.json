@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "required_tools": [],
+  "optional_tools": ["list_files", "search_files", "read_file", "read_outline", "read_page", "create_note"],
+  "requires_knowledge_base": false,
+  "activation": {
+    "auto": true,
+    "user_invocable": true,
+    "internal_only": false,
+    "keywords": ["学习笔记", "整理笔记", "复习笔记", "study notes"],
+    "priority": 65
+  }
+}
