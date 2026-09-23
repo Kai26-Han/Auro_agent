@@ -1,4 +1,4 @@
-# Auro
+# <img src="images/logo1.png" width="44" align="absmiddle" alt="Auro logo"> Auro
 
 **Agentic for everything.**
 
