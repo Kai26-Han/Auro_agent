@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="images/readme-header.svg" width="360" alt="Auro — Agentic for everything.">
+  <img src="images/readme-header.svg" width="260" alt="Auro — Agentic for everything.">
 </h1>
 
 <div align="center">
