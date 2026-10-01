@@ -1,10 +1,17 @@
-# <img src="images/logo1.png" width="44" align="absmiddle" alt="Auro logo"> Auro
+<h1 align="center">
+  <img src="images/logo1.png" width="64" height="64" align="absmiddle" alt="Auro logo">
+  Auro
+</h1>
+
+<div align="center">
+
+**English** · [简体中文](README.zh-CN.md)
+
+</div>
 
 **Agentic for everything.**
 
 A local-first AI agent workspace for personal learning and work.
-
-**English** · [简体中文](README.zh-CN.md)
 
 ![Auro workspace home](images/webpage.png)
 

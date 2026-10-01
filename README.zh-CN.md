@@ -1,10 +1,17 @@
-# <img src="images/logo1.png" width="44" align="absmiddle" alt="Auro logo"> Auro
+<h1 align="center">
+  <img src="images/logo1.png" width="64" height="64" align="absmiddle" alt="Auro logo">
+  Auro
+</h1>
+
+<div align="center">
+
+[English](README.md) · **简体中文**
+
+</div>
 
 **Agentic for everything.**
 
 一个面向个人学习与工作的本地优先 AI Agent 工作台。
-
-[English](README.md) · **简体中文**
 
 ![Auro 工作台主页](images/webpage.png)
 
