@@ -3,13 +3,13 @@
   Auro
 </h1>
 
+<p align="center"><strong>Agentic for everything.</strong></p>
+
 <div align="center">
 
 [English](README.md) · **简体中文**
 
 </div>
-
-**Agentic for everything.**
 
 一个面向个人学习与工作的本地优先 AI Agent 工作台。
 
