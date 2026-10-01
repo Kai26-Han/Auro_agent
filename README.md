@@ -1,9 +1,6 @@
 <h1 align="center">
-  <img src="images/logo1.png" width="64" height="64" align="absmiddle" alt="Auro logo">
-  Auro
+  <img src="images/readme-header.svg" width="360" alt="Auro — Agentic for everything.">
 </h1>
-
-<p align="center"><strong>Agentic for everything.</strong></p>
 
 <div align="center">
 
